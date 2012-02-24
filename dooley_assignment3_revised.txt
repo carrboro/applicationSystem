@@ -23,7 +23,8 @@ Deliverable #3:
 	Resume: /job{job-id}/applications/{app-id}/resume
 	Cover letter: /job{job-id}/applications/{app-id}/letter
 	List of references: /job{job-id}/applications/{app-id}/references
-	List of submissions for a job posting: /job{job-id}/applications	List of submissions by an applicant: /applications?q={applicant-id}
+	List of submissions for a job posting: /job{job-id}/applications
+	List of submissions by an applicant: /applications?q={applicant-id}
 	List of postings that match a given query: /find?q={query}
 
 
