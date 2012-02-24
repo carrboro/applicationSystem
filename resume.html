@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+	<head>
+		<title>resume</title>
+	</head>
+	<body>
+	
+	<div class="resume">
+		(Maybe just a link to download the file?)
+		<br /><br />
+	</div>
+	
+	<div class="update">
+	<!--available only if logged in as the applicant-->
+	<!--should be an idempotent update-->
+	Update your resume
+	<form method="post" action="resume.html" class="resume-update">
+		<label>Upload resume: </label><input type="file" name="resume" value="" /><br />
+		<input type="submit" value="Update" />
+	</form>
+	</div>
+	
+	<div id="queries">
+	<ul>
+		<li><a href="submission.html" rel="submission" title="complete submission">back to full submission</a></li>
+		<li><a href="index.html" rel="jobs-all home" title="homepage">home</a></li>
+ 		<li><a href="job.html" rel="job-posting" class="title">view job posting</a></li>
+	</ul>
+	</div>
+	
+	</body>
+</html>
