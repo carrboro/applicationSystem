@@ -1,0 +1,81 @@
+Deliverable #1: 
+	My service deals with job applications, and I'll call the primary unit of information an "application," meaning one position / application pair. (This is admittedly a little fuzzy, since there's not one clearly bounded physical object to reference--other ways of slicing things would be equally possible.) A job application as a conceptual unit doesn't have an inherent unique identifier, so we'll have to create one. The combination of applicant and submission time might work, although there could be weird edge cases, for instance if someone submits an application at the same moment that someone else is submitting it on their behalf. A safer bet might be to just have the system assign an identifier.
+	Structure: the "application" could be split into four main parts: job posting, resume, cover letter, list of references. Depending on context (academic, design) there might need to be more parts (letters of reference, writing samples, portfolios), but here I'll focus on basics. Within those parts, the list of references can be further broken down into the individual reference; the resume can possibly be broken down into entries, but that might limit the possibility for applicants to use alternate formats.
+	Classification would vary somewhat for the posting and the application materials. The postings might be classified by location or by job category. The other items could be classified by job applied for, applicant, possibly accepted (for further notice) / rejected. People might want to find items by any of those criteria, but not all ways of finding items should be publicly accessible. For instance, only the employer who posted a job should be able to see the list of applications for that job; only the applicant him/herself should be able to see the list of all of his/her applications.
+
+
+Deliverable #2:
+	The list of job postings
+	Individual job posting
+	Submission
+	Resume
+	Cover letter
+	List of references
+	List of submissions for a job posting
+	List of submissions by an applicant
+	List of postings that match a given query
+
+	
+Deliverable #3:
+	The list of job postings: /
+	Individual job posting: /job{job-id}
+	Submission: /job{job-id}/applications/{app-id}
+	Resume: /job{job-id}/applications/{app-id}/resume
+	Cover letter: /job{job-id}/applications/{app-id}/letter
+	List of references: /job{job-id}/applications/{app-id}/references
+	List of submissions for a job posting: /job{job-id}/applications	List of submissions by an applicant: /applications?q={applicant-id}
+	List of postings that match a given query: /find?q={query}
+
+
+Deliverable #4:
+	/ supports GET and POST. GET returns a list of postings. POST creates a new posting.
+	/job{job-id} supports GET, PUT, and DELETE. GET returns an existing posting, PUT replaces it, and DELETE deletes it.
+	/job{job-id}/applications/{app-id} supports GET, PUT, and DELETE. GET returns a complete application. PUT replaces its contents in their entirety. DELETE destroys the application.
+	/job{job-id}/applications/{app-id}/resume supports GET, PUT, and DELETE. GET shows the resume, PUT replaces it with new content, and DELETE destroys it.
+	/job{job-id}/applications/{app-id}/letter supports GET, PUT, and DELETE. GET shows the cover letter, PUT replaces it with new content, and DELETE destroys it.
+	/job{job-id}/applications/{app-id}/references supports GET, PUT, and DELETE. GET shows the list of references, PUT replaces it with new content, and DELETE destroys it.
+	/job{job-id}/applications supports GET and POST. GET returns a (possibly empty) list of applications. POST creates a new application to the job.
+	/applications?q={applicant-id} supports GET, which returns a (possibly empty) list of applications.
+	/find?q={query} supports GET, which returns a (possibly empty) list of postings.
+
+
+Deliverable #5
+	/
+		GET returns a list with abbreviated forms of postings, linked to the full version, in the order they were created; or the message "No jobs are currently posted." Status for both: 200 OK.
+		If logged in, POST returns the message Created job {job-id}, the URI of the new posting, and 201 Created. If not logged in, it returns the message "You must be logged in to add a posting"; 401 Unauthorized.
+
+	/job{job-id}
+		GET returns the full version of an existing job posting, including description and instructions for applying. Status: 200 OK.
+		If logged in as the posting creator, PUT requires some sort of representation. If missing representation,  it returns the message "No job posting was provided"; 400 Bad Request. If the posting specified doesn't exist, it returns a message saying "The job posting you specified does not exist"; 404 Not Found. Otherwise, it returns the message "Job posting {job-id} updated"; 200 OK. If not logged in, returns the message "You must log in to update this posting"; 401 Unauthorized. If logged in as someone else, returns a message saying "Your account does not have access to this resource"; 403 Forbidden.
+		If logged in as the posting creator, DELETE destroys it (200 OK) unless the posting specified doesn't exist (404 Not Found); in that case, it returns a message saying "The job posting you specified does not exist." If not logged in, returns the message "You must log in to delete this posting"; 401 Unauthorized. If logged in as someone else, returns a message saying "Your account does not have access to this resource"; 403 Forbidden.
+
+	/job{job-id}/applications/{app-id}
+		If logged in as the applicant or as the creator of the job posting connected to the application, GET returns a a listing of the application sections with links to the full version of each; 200 OK. If not logged in, GET returns a message saying "You must be logged in to view this resource"; 401 Unauthorized. If logged in as someone else, GET returns a message saying "Your account does not have access to this resource"; 403 Forbidden.
+		If logged in as the applicant, PUT requires some sort of representation. If missing representation, it returns the message "No information was provided"; 400 Bad Request. If the application specified doesn't exist, it returns a message saying "The application you specified does not exist"; 404 Not Found. Otherwise, it returns the message "Application {app-id} updated"; 200 OK. If not logged in, returns the message "You must log in to update this application"; 401 Unauthorized. If logged in as someone else, returns a message saying "Your account does not have access to this resource"; 403 Forbidden.
+		If logged in as the applicant, DELETE destroys it (200 OK) unless the application specified doesn't exist (404 Not Found); in that case, it returns a message saying "The resource you specified does not exist." If not logged in, returns the message "You must log in to delete this application"; 401 Unauthorized. If logged in as someone else, returns a message saying "Your account does not have access to this resource"; 403 Forbidden.
+
+	/job{job-id}/applications/{app-id}/resume
+		If logged in as the applicant or as the creator of the job posting connected to the application, GET shows the full version of the resume; 200 OK. If not logged in, GET returns a message saying "You must be logged in to view this resource"; 401 Unauthorized. If logged in as someone else, GET returns a message saying "Your account does not have access to this resource"; 403 Forbidden.
+		If logged in as the applicant, PUT requires some sort of representation. If missing representation, it returns the message "No resume was provided"; 400 Bad Request. If the application specified doesn't exist, it returns a message saying "The application you specified does not exist"; 404 Not Found. Otherwise, it returns the message "Resume for application {app-id} updated"; 200 OK. If not logged in, returns the message "You must log in to update this application"; 401 Unauthorized. If logged in as someone else, returns a message saying "Your account does not have access to this resource"; 403 Forbidden.
+		If logged in as the applicant, DELETE destroys it (200 OK) unless the application specified as containing the resume doesn't exist (404 Not Found); in that case, it returns a message saying "The resource you specified does not exist." If not logged in, returns the message "You must log in to delete this resume"; 401 Unauthorized. If logged in as someone else, returns a message saying "Your account does not have access to this resource"; 403 Forbidden.
+
+	/job{job-id}/applications/{app-id}/letter
+		If logged in as the applicant or as the creator of the job posting connected to the application, GET shows the full version of the cover letter; 200 OK. If not logged in, GET returns a message saying "You must be logged in to view this resource"; 401 Unauthorized. If logged in as someone else, GET returns a message saying "Your account does not have access to this resource"; 403 Forbidden.
+		If logged in as the applicant, PUT requires some sort of representation. If missing representation, it returns the message "No cover letter was provided"; 400 Bad Request. If the application specified doesn't exist, it returns a message saying "The application you specified does not exist"; 404 Not Found. Otherwise, it returns the message "Cover letter for application {app-id} updated"; 200 OK. If not logged in, returns the message "You must log in to update this application"; 401 Unauthorized. If logged in as someone else, returns a message saying "Your account does not have access to this resource"; 403 Forbidden.
+		If logged in as the applicant, DELETE destroys it (200 OK) unless the application specified as containing the letter doesn't exist (404 Not Found); in that case, it returns a message saying "The resource you specified does not exist." If not logged in, returns the message "You must log in to delete this letter"; 401 Unauthorized. If logged in as someone else, returns a message saying "Your account does not have access to this resource"; 403 Forbidden.
+
+	/job{job-id}/applications/{app-id}/references
+		If logged in as the applicant or as the creator of the job posting connected to the application, GET shows the full list of references; 200 OK. If not logged in, GET returns a message saying "You must be logged in to view this resource"; 401 Unauthorized. If logged in as someone else, GET returns a message saying "Your account does not have access to this resource"; 403 Forbidden.
+		If logged in as the applicant, PUT requires some sort of representation. If missing representation, it returns the message "No reference list was provided"; 400 Bad Request. If the application specified doesn't exist, it returns a message saying "The application you specified does not exist"; 404 Not Found. Otherwise, it returns the message "Reference list for application {app-id} updated"; 200 OK. If not logged in, returns the message "You must log in to update this application"; 401 Unauthorized. If logged in as someone else, returns a message saying "Your account does not have access to this resource"; 403 Forbidden.
+		If logged in as the applicant, DELETE destroys it (200 OK) unless the application specified as containing the list doesn't exist (404 Not Found); in that case, it returns a message saying "The resource you specified does not exist." If not logged in, returns the message "You must log in to delete this reference list"; 401 Unauthorized. If logged in as someone else, returns a message saying "Your account does not have access to this resource"; 403 Forbidden.
+
+	/job{job-id}/applications
+		If logged in as the posting creator, GET returns a list with abbreviated forms of applications, linked to the full version, or the message "No applications have been submitted." Status for both: 200 OK.	If not logged in, GET returns the message "This view is only available to the posting creator" with a 401 Unauthorized status code. If logged in as someone else, GET returns a message saying "Your account does not have access to this resource"; 403 Forbidden.
+		If logged in, POST returns the message Submitted application {app-id} for {job-id}, the URI of the new application, and 201 Created. If not logged in, it returns the message "You must be logged in to apply"; 401 Unauthorized.
+
+	/applications?q={applicant-id}
+		If logged in as the applicant, GET returns a list with abbreviated forms of applications, linked to the full version, or the message "You haven't submitted any applications yet." Status for both: 200 OK. If not logged in, GET returns the message "You must log in to access this view" with a 401 Unauthorized status code. If logged in as someone else, GET returns a message saying "Your account does not have access to this resource"; 403 Forbidden.
+
+	/find?q={query}
+		GET returns a list with abbreviated forms of postings, linked to the full version, or the message "No jobs matched your query." Status for both: 200 OK.
+
