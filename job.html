@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+	<head>
+		<title>job posting</title>
+	</head>
+	<body>
+	
+		<div id="job-postings">
+		<ul class="single">
+		
+			<li>
+	  			<span class="title">Job Title</span>
+	  			<br />
+	  			<span class="employer">Employer Name</span>
+	  			<br />
+	  			<span class="location">Job Location</span>
+	  			<br />
+	  			<span class="full-description">The full version of the job description goes here.</span>
+	  		</li>
+		
+		</ul>
+		</div>
+		
+		<br />
+		
+		<div class="new">
+		<!--uses POST -> non-idempotent-->
+		Apply for this job
+		<form method="post" action="job-submissions.html" class="submission-new">
+			<label>Upload resume: </label><input type="file" name="resume" value="" /><br />
+			<label>Upload cover letter: </label><input type="file" name="cover-letter" value="" /><br />
+			<label>Upload refererences: </label><input type="file" name="references" value="" /><br />
+			<input type="submit" value="Submit application" />
+		</form>
+		</div>
+		
+		<br /><br />
+		
+		<div class="update">
+		<!--available only if logged in as the employer-->
+		<!--should be an idempotent update-->
+		Update your posting
+		<form method="post" action="job.html" class="posting-update">
+			<label>Job title: </label><input type="text" name="title" value="" /><br />
+			<label>Employer name: </label><input type="text" name="employer" value="" /><br />
+			<label>Location: </label><input type="text" name="location" value="" /><br />
+			<label>Brief description: </label><textarea name="brief-description"></textarea><br />
+			<label>Full description: </label><textarea name="full-description"></textarea><br />
+			<input type="submit" value="Submit posting" />
+		</form>
+		</div>
+		
+		<br />
+		
+		<div id="queries">
+		<ul>
+			<li><a href="index.html" rel="jobs-all home" title="homepage">home</a></li>
+			<!--job submissions link available only if logged in as the employer-->
+			<li><a href="job-submissions.html" rel="job-submissions" title="submissions for this job"">view submissions for this posting</a></li>
+		</ul>
+		</div>
+	
+	</body>
+</html>
