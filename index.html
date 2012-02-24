@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+	<head>
+		<title>job application system</title>
+	</head>
+	<body>
+	
+		<div id="job-postings">
+		<ul class="all">
+		
+	  		<li>
+	  			<a href="job.html" rel="job-posting" class="title">Job Title</a>
+	  			<br />
+	  			<span class="employer">Employer Name</span>
+	  			<br />
+	  			<span class="location">Job Location</span>
+	  			<br />
+	  			<span class="brief-description">A short version of the job description goes here.</span>
+	  		</li>
+	  				
+	  		<li>
+	  			<a href="job.html" rel="job-posting" class="title">Job Title</a>
+	  			<br />
+	  			<span class="employer">Employer Name</span>
+	  			<br />
+	  			<span class="location">Job Location</span>
+	  			<br />
+	  			<span class="brief-description">A short version of the job description goes here.</span>
+	  		</li>
+	  				
+	  		<li>
+	  			<a href="job.html" rel="job-posting" class="title">Job Title</a>
+	  			<br />
+	  			<span class="employer">Employer Name</span>
+	  			<br />
+	  			<span class="location">Job Location</span>
+	  			<br />
+	  			<span class="brief-description">A short version of the job description goes here.</span>
+	  		</li>
+	  				
+	  		<li>
+	  			<a href="job.html" rel="job-posting" class="title">Job Title</a>
+	  			<br />
+	  			<span class="employer">Employer Name</span>
+	  			<br />
+	  			<span class="location">Job Location</span>
+	  			<br />
+	  			<span class="brief-description">A short version of the job description goes here.</span>
+	  		</li>
+	  				
+	  		<li>
+	  			<a href="job.html" rel="job-posting" class="title">Job Title</a>
+	  			<br />
+	  			<span class="employer">Employer Name</span>
+	  			<br />
+	  			<span class="location">Job Location</span>
+	  			<br />
+	  			<span class="brief-description">A short version of the job description goes here.</span>
+	  		</li>
+	  		
+		</ul>
+		</div>
+		
+		<br /><br />
+		
+		<div class="new">
+		<!--available only if logged in as an employer-->
+		<!--uses POST -> non-idempotent-->
+		Add a new posting
+		<form method="post" action="index.html" class="posting-new">
+			<label>Job title: </label><input type="text" name="title" value="" /><br />
+			<label>Employer name: </label><input type="text" name="employer" value="" /><br />
+			<label>Location: </label><input type="text" name="location" value="" /><br />
+			<label>Brief description: </label><textarea name="brief-description"></textarea><br />
+			<label>Full description: </label><textarea name="full-description"></textarea><br />
+			<input type="submit" value="Submit posting" />
+		</form>
+		</div>
+		
+		<div id="job-search">
+		<form method="get" action="find.html">
+			<input type="text" name="search" value="" />
+			<input type="submit" value="Search jobs" />
+		</form>
+		</div>
+	
+	</body>
+</html>
