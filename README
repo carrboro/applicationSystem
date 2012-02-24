@@ -1,1 +1,167 @@
-"Hello world!"
+ID attribute values:
+
+job-postings
+	Applies to a DIV tag. A list of one or more job postings.
+
+job-search
+	Applies to a DIV tag. SHOULD contain the form to search job postings.
+
+job-submissions
+	Applies to a DIV tag. A list of one or more submissions.
+
+queries
+	Applies to a DIV tag. A set of outbound links to related resources.
+
+
+
+
+Class attribute values:
+
+all
+	Applies to a UL tag. As descendent of a div#job-postings, a list representation of job postings.
+
+applicant-name
+	Applies to an A tag or a SPAN tag. An applicant name; when applied to an A tag, links to the applicant's full submission.
+
+applicant-view
+	Applies to a UL tag. The list of submissions by an applicant, available only to that applicant when logged in.
+
+brief-description
+	Applies to a SPAN tag. An abbreviated job description.
+
+cover-letter
+	Applies to a DIV tag. A cover letter representation.
+
+cover-letter-update
+	Applies to a FORM tag. A template to update only the cover letter from a submission. MUST be set to FORM.method="post". SHOULD contain this descendent element:
+	INPUT[file].name="cover-letter"
+
+employer
+	Applies to a SPAN tag. The name of the employer posting a job.
+
+employer-view
+	Applies to a UL tag. The list of submissions for a posting, available only to the employer who created to posting, when logged in.
+
+full-description
+	Applies to a SPAN tag. A full job description.
+
+location
+	Applies to a SPAN tag. The (city / state / country) location of a job.
+
+new
+	Applies to a DIV tag. SHOULD contain the form to add a new resource.
+
+posting-new
+	Applies to a FORM tag. A template to add a new job posting. SHOULD contain these descendent elements:
+	INPUT[text].name="title"
+	INPUT[text].name="employer"
+	INPUT[text].name="location"
+	TEXTAREA.name="brief-description"
+	TEXTAREA.name="full-description"
+
+posting-update
+	Applies to a FORM tag. A template to update an existing job posting. SHOULD contain these descendent elements:
+	INPUT[text].name="title"
+	INPUT[text].name="employer"
+	INPUT[text].name="location"
+	TEXTAREA.name="brief-description"
+	TEXTAREA.name="full-description"
+
+references
+	Applies to a DIV tag. A reference list representation.
+
+references-update
+	Applies to a FORM tag. A template to update only the references list from a submission. MUST be set to FORM.method="post". SHOULD contain this descendent element:
+	INPUT[file].name="references"	
+
+resume
+	Applies to a DIV tag. A resume representation.
+
+resume-update
+	Applies to a FORM tag. A template to update only the resume from a submission. MUST be set to FORM.method="post". SHOULD contain this descendent element:
+	INPUT[file].name="resume"	
+
+single
+	Applies to a UL tag. As descendent of a div#job-postings, contains an individual job posting representation. As descendent of a div#job-submissions, contains an individual submission.
+
+submission-new
+	Applies to a FORM tag. A template to add a new submission. SHOULD contain these descendent elements:
+	INPUT[file].name="resume"
+	INPUT[file].name="cover-letter"
+	INPUT[file].name="references"
+
+submission-update
+	Applies to a FORM tag. A template to update all parts of an existing submission. MUST be set to FORM.method="post". SHOULD contain these descendent elements:
+	INPUT[file].name="resume"
+	INPUT[file].name="cover-letter"
+	INPUT[file].name="references"
+
+title
+	Applies to an A tag or a SPAN tag. A job title; when applied to an A tag, links to the full posting for that job.
+
+update
+	Applies to a DIV tag. SHOULD contain the form to update an existing resource.
+
+
+
+
+Name attribute values:
+
+brief-description
+	Applied to a TEXTAREA element. An abbreviated job description.
+
+cover-letter
+	Applied to an INPUT[file] element. The cover letter for a submission.
+
+employer
+	Applied to an INPUT[text] element. The name of the employer posting a job.
+
+full-description
+	Applied to a TEXTAREA element. A full-length job description.
+
+location
+	Applied to an INPUT[text] element. The (city / state / country) location of a job.
+
+references
+	Applied to an INPUT[file] element. The list of references for a submission.
+
+resume
+	Applied to an INPUT[file] element. The resume for a submission.
+
+search
+	Applied to an INPUT[text] element. The value to use when searching postings.
+
+title
+	Applied to an INPUT[text] element. The title of a job posting.
+
+
+
+
+Rel attribute values:
+
+applicant-submissions
+	Applied to an A tag. A reference to a list representation of submissions by a logged-in applicant.
+
+cover-letter
+	Applied to an A tag. A reference to a single cover letter representation.
+
+home
+	Applied to an A tag. A reference to the starting URI for the application.
+
+job-submissions
+	Applied to an A tag. A reference to a list representation of submissions to a job posting.
+
+job-posting
+	Applied to an A tag. A reference to a single job posting representation.
+
+jobs-all
+	Applied to an A tag. A reference to a list representation of all job postings in the system.
+
+references
+	Applied to an A tag. A reference to a single reference list representation.
+
+resume
+	Applied to an A tag. A reference to a single resume representation.
+
+submission
+	Applied to an A tag. A reference to a single job submission representation.
