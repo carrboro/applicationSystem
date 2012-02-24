@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+	<head>
+		<title>submission</title>
+	</head>
+	<body>
+		
+		<div id="job-submissions">
+		<ul class="single">
+		
+			<li>
+				<span class="applicant-name">Applicant Name</span>
+				<br />
+	  			<a href="resume.html" rel="resume">Resume</a>
+	  			<br />
+	  			<a href="coverletter.html" rel="cover-letter">Cover Letter</a>
+	  			<br />
+	  			<a href="references.html" rel="references">References</a>
+	  		</li>
+		
+		</ul>
+		</div>
+		
+		<div class="update">
+		<!--available only if logged in as the applicant-->
+		<!--should be an idempotent update-->
+		Update your application
+		<form method="post" action="submission.html" class="submission-update">
+			<label>Upload resume: </label><input type="file" name="resume" value="" /><br />
+			<label>Upload cover letter: </label><input type="file" name="cover-letter" value="" /><br />
+			<label>Upload references: </label><input type="file" name="references" value="" /><br />
+			<input type="submit" value="Submit application" />
+		</form>
+		</div>
+		
+		<div id="queries">
+		<ul>
+			<li><a href="index.html" rel="jobs-all home" title="homepage">home</a></li>
+	  		<li><a href="job.html" rel="job-posting" class="title">view job posting</a></li>
+			<!--job submissions link available only if logged in as the employer-->
+			<li><a href="job-submissions.html" rel="job-submissions" title="submissions for this job"">view all submissions for this posting</a></li>
+			<!--applicant submissions link available only if logged in as the applicant-->
+			<li><a href="applicant-submissions.html" rel="applicant-submissions" title="all of your submissions">view all of your current submissions</a></li>
+		</ul>
+		</div>
+
+	</body>
+</html>
